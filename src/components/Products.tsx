@@ -1,5 +1,8 @@
 
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 const products = [
     {
@@ -83,23 +86,41 @@ const products = [
 ];
 
 export default function Products() {
+    const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+
+    const handleCardClick = (id: number) => {
+        setFlippedCards(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(id)) {
+                newSet.delete(id);
+            } else {
+                newSet.add(id);
+            }
+            return newSet;
+        });
+    };
+
     return (
         <section id="products" style={{ position: 'relative' }}>
             <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                <div style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 6vw, 4rem)' }}>
                     <h2 style={{ marginBottom: '1rem' }}>Our <span style={{ color: 'var(--primary)' }}>Products</span></h2>
-                    <p style={{ maxWidth: '600px', margin: '0 auto', opacity: 0.8 }}>
+                    <p style={{ maxWidth: '600px', margin: '0 auto', opacity: 0.8, padding: '0 1rem' }}>
                         Engineered for performance and durability, our comprehensive range of tooling solutions drives industrial productivity.
                     </p>
                 </div>
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    gap: '2rem'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+                    gap: 'clamp(1rem, 3vw, 2rem)'
                 }}>
                     {products.map((product) => (
-                        <div key={product.id} className="flip-card">
+                        <div
+                            key={product.id}
+                            className={`flip-card ${flippedCards.has(product.id) ? 'flipped' : ''}`}
+                            onClick={() => handleCardClick(product.id)}
+                        >
                             <div className="flip-card-inner">
                                 <div className="flip-card-front">
                                     <div style={{ position: 'relative', width: '100%', height: '80%' }}>
@@ -116,14 +137,15 @@ export default function Products() {
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         background: 'rgba(0,0,0,0.2)',
-                                        backdropFilter: 'blur(5px)'
+                                        backdropFilter: 'blur(5px)',
+                                        padding: '0 0.5rem'
                                     }}>
-                                        <h3 style={{ fontSize: '1.2rem', margin: 0 }}>{product.name}</h3>
+                                        <h3 style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)', margin: 0, textAlign: 'center' }}>{product.name}</h3>
                                     </div>
                                 </div>
                                 <div className="flip-card-back">
                                     <h3 style={{ marginBottom: '1rem', color: 'var(--primary)' }}>{product.name}</h3>
-                                    <p style={{ opacity: 0.9, lineHeight: '1.6', fontSize: '1rem' }}>{product.description}</p>
+                                    <p style={{ opacity: 0.9, lineHeight: '1.6', fontSize: 'clamp(0.85rem, 2vw, 1rem)' }}>{product.description}</p>
                                 </div>
                             </div>
                         </div>
@@ -133,3 +155,4 @@ export default function Products() {
         </section>
     );
 }
+

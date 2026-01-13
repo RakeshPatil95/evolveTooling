@@ -10,7 +10,6 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
-      <About />
       <Products />
       <Features />
 
@@ -41,6 +40,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <About />
 
       <Contact />
 
