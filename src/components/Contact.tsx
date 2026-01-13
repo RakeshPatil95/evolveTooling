@@ -84,9 +84,15 @@ export default function Contact() {
                                 <label style={{ display: 'block', fontSize: '0.8rem', opacity: 0.5, marginBottom: '0.3rem', textTransform: 'uppercase' }}>Email</label>
                                 <a
                                     href="mailto:evolvetooling19@gmail.com"
-                                    style={{ fontSize: '1.1rem', color: 'var(--primary)', textDecoration: 'none', display: 'block' }}
+                                    style={{ fontSize: '1.1rem', color: 'var(--primary)', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}
                                 >
                                     evolvetooling19@gmail.com
+                                </a>
+                                <a
+                                    href="mailto:evolvetoolingsolution@gmail.com"
+                                    style={{ fontSize: '1.1rem', color: 'var(--primary)', textDecoration: 'none', display: 'block' }}
+                                >
+                                    evolvetoolingsolution@gmail.com
                                 </a>
                             </div>
                             <div>
